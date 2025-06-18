@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Solicitação de Compras</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; max-width: 600px; margin: auto; }
+    label { margin-top: 10px; display: block; }
+    input, select, textarea, button { width: 100%; padding: 8px; margin-top: 5px; }
+    button { background-color: #28a745; color: white; border: none; cursor: pointer; }
+    button:hover { background-color: #218838; }
+  </style>
+</head>
+<body>
+  <h2>Formulário de Solicitação de Compras</h2>
+  <form id="solicitacaoForm">
+    <label for="solicitante">Nome do Solicitante:</label>
+    <input type="text" id="solicitante" required>
+
+    <label for="produto">Produto:</label>
+    <select id="produto" required>
+      <option value="">-- Selecione um produto --</option>
+      <option value="Monitor 24''">Monitor 24"</option>
+      <option value="Teclado Mecânico">Teclado Mecânico</option>
+      <option value="Mouse Sem Fio">Mouse Sem Fio</option>
+      <option value="Cadeira Ergonômica">Cadeira Ergonômica</option>
+      <option value="Notebook Dell i7">Notebook Dell i7</option>
+    </select>
+
+    <label for="quantidade">Quantidade:</label>
+    <input type="number" id="quantidade" min="1" required>
+
+    <label for="observacoes">Observações:</label>
+    <textarea id="observacoes" rows="4"></textarea>
+
+    <button type="submit">Enviar Solicitação</button>
+  </form>
+
+  <script>
+    document.getElementById("solicitacaoForm").addEventListener("submit", function(event) {
+      event.preventDefault();
+
+      const nome = document.getElementById("solicitante").value;
+      const produto = document.getElementById("produto").value;
+      const quantidade = document.getElementById("quantidade").value;
+      const observacoes = document.getElementById("observacoes").value;
+
+      const corpo = `Solicitação de Compra:\n\nSolicitante: ${nome}\nProduto: ${produto}\nQuantidade: ${quantidade}\nObservações: ${observacoes}`;
+
+      window.location.href = `mailto:compras@empresa.com?subject=Solicitação de ${produto}&body=${encodeURIComponent(corpo)}`;
+    });
+  </script>
+</body>
+</html>
